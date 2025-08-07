@@ -8,11 +8,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { BookService } from '../../services/book.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-book-form',
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, RouterLink],
   templateUrl: './book-form.html',
   styleUrl: './book-form.css',
 })
