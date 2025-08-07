@@ -14,10 +14,14 @@ Sistema completo para cadastro, visualização e gerenciamento de livros. Desenv
 ---
 
 ## 📦 Estrutura do Projeto
+
 teste-meta-telecom/
+
 ├── telecom-api/ # API Java Spring Boot
+
 ├── telecom-ui/ # Aplicação Angular
-└── README.md
+
+└── README.md # Você está aqui.
 
 ## 🚀 Como Executar
 
@@ -36,11 +40,13 @@ teste-meta-telecom/
   -e POSTGRES_DB=telecomdb \
   -p 5432:5432 \
   -v postgres_telecom_data:/var/lib/postgresql/data \
-  -d postgres:16```
+  -d postgres:16
+```
 
-### ⚙️ Configuracao da API Java 
+### ⚙️ Configuracao da API Java
 
 No application.properties, os campos são os seguintes
+
 ```
 spring.application.name=telecom-api
 spring.datasource.url=jdbc:postgresql://localhost:5432/telecomdb
@@ -53,33 +59,37 @@ spring.jpa.hibernate.ddl-auto=update
 ### ▶️ Rodar a API
 
 Com banco de dados configurado, execute:
-```./mvnw spring-boot:run```
+`./mvnw spring-boot:run`
 
 ### 🖥️ Rodar o Frontend Angular
 
-Acesse a pasta ```telecom-ui``` e execute:
+Acesse a pasta `telecom-ui` e execute:
+
 ```
 npm install
 ng serve
 ```
-A aplicacao estará disponível em http://localhost:4200/books
+
+A aplicacao estará disponível em `http://localhost:4200/books`
 
 ### 📚 Funcionalidades
 
-✅ Cadastro de livros com capa, título, autor e resumo
+- ✅ Cadastro de livros com capa, título, autor e resumo
 
-📝 Edição e remoção de livros
+- 📝 Edição e remoção de livros
 
-📖 Visualização detalhada de cada livro
+- 📖 Visualização detalhada de cada livro
 
-🔍 Listagem de todos os livros
+- 🔍 Listagem de todos os livros
 
-💡 UI responsiva e simples
+- 💡 UI responsiva e simples
 
 ### 📂 Endpoints Principais da API
-Método	Rota	Descrição
-GET	/books	Lista todos os livros
-GET	/books/{id}	Retorna um livro
-POST	/books	Cria um novo livro
-PUT	/books/{id}	Atualiza um livro
-DELETE	/books/{id}	Remove um livro
+
+Método Rota Descrição
+
+- `GET /books` Lista todos os livros
+- `GET /books/{id}` Retorna um livro detalhado - com summary
+- `POST /books` Cria um novo livro
+- `PUT /books/{id}` Atualiza um livro
+- `DELETE /books/{id}` Remove um livro
