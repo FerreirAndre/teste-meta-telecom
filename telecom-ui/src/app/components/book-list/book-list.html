@@ -10,7 +10,12 @@
   <div class="grid">
     @for(book of books;track book.id) {
     <article class="book-card">
-      <img [src]="book.coverLink" [alt]="book.title" class="cover" />
+      <img
+        [src]="book.coverLink"
+        [alt]="book.title"
+        class="cover"
+        routerLink="/books/{{ book.id }}"
+      />
 
       <h3>{{ book.title }}</h3>
       <p>
@@ -18,11 +23,15 @@
       </p>
 
       <footer class="actions">
-        <button (click)="editar(book.id)">Editar</button>
-        <button class="secondary" (click)="deletar(book.id)">Excluir</button>
+        <button class="edit-button" (click)="edit(book.id)">Edit</button>
+        <button class="delete-button" (click)="delete(book.id)">Delete</button>
       </footer>
     </article>
     }
   </div>
+
+  @if(!loading && books.length ===0){
   <p>Nenhum livro encontrado.</p>
+  }
+  <a routerLink="/books/new" class="contrast">New Book</a>
 </main>

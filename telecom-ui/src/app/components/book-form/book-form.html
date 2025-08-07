@@ -1,0 +1,25 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+  <label class="form-label">
+    Title
+    <input formControlName="title" type="text" required class="form-input" />
+  </label>
+  <label class="form-label">
+    Cover Link
+    <input formControlName="coverLink" type="url" required class="form-input" />
+  </label>
+  <label class="form-label">
+    Writer
+    <input formControlName="writer" type="text" required class="form-input" />
+  </label>
+  <label class="form-label">
+    Summary
+    <textarea
+      formControlName="summary"
+      required
+      class="form-textarea"
+    ></textarea>
+  </label>
+  <button type="submit" [disabled]="form.invalid" class="form-button">
+    {{ isEditMode ? "Save Alterations" : "Create" }}
+  </button>
+</form>
