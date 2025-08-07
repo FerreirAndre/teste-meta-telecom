@@ -1,0 +1,28 @@
+<main class="container">
+  <h2>Meus Livros</h2>
+
+  @if(loading){
+  <p>Carregando livros...</p>
+  } @else if(error){
+  <p>error</p>
+  }
+
+  <div class="grid">
+    @for(book of books;track book.id) {
+    <article class="book-card">
+      <img [src]="book.coverLink" [alt]="book.title" class="cover" />
+
+      <h3>{{ book.title }}</h3>
+      <p>
+        <small>{{ book.writer }}</small>
+      </p>
+
+      <footer class="actions">
+        <button (click)="editar(book.id)">Editar</button>
+        <button class="secondary" (click)="deletar(book.id)">Excluir</button>
+      </footer>
+    </article>
+    }
+  </div>
+  <p>Nenhum livro encontrado.</p>
+</main>
