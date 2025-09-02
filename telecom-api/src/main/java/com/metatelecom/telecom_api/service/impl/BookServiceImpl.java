@@ -26,7 +26,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDto getBookById(Long id) {
-        var book = bookRepository.findById(id).orElseThrow(()->
+        var book = bookRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Book not found."));
         return BookMapper.mapToBookDto(book);
     }
@@ -34,27 +34,29 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<BookDto> getAllBooks() {
         var books = bookRepository.findAll();
-        return books.stream().map((book) -> BookMapper.mapToBookDto(book)).collect(Collectors.toList());
+        return books.stream().map(BookMapper::mapToBookDto).collect(Collectors.toList());
     }
 
     @Override
-    public BookDto updateBook(Long id, BookDto updatedBook) {
-        Book book = bookRepository.findById(id).orElseThrow(()->
+    public BookDto updateBook(Long id, BookDto bookDto) {
+        Book book = bookRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Book not found"));
 
-        book.setTitle(updatedBook.getTitle());
-        book.setSummary(updatedBook.getSummary());
-        book.setCoverLink(updatedBook.getCoverLink());
-        book.setWriter(updatedBook.getWriter());
+        Book bookUpdated = Book.builder()
+                .title(bookDto.getTitle() != null ? bookDto.getTitle() : book.getTitle())
+                .coverLink(bookDto.getCoverLink() != null ? bookDto.getCoverLink() : book.getCoverLink())
+                .summary(bookDto.getSummary() != null ? bookDto.getSummary() : book.getSummary())
+                .writer(bookDto.getWriter() != null ? bookDto.getWriter() : book.getWriter())
+                .build();
 
-        var bookToReturn = bookRepository.save(book);
+        var bookToReturn = bookRepository.saveAndFlush(bookUpdated);
 
         return BookMapper.mapToBookDto(bookToReturn);
     }
 
     @Override
     public void deleteBook(Long id) {
-        bookRepository.findById(id).orElseThrow(()->
+        bookRepository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("Book not found"));
         bookRepository.deleteById(id);
     }
